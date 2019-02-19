@@ -26,3 +26,18 @@ snap install pycharm-community --classic
 sudo python -m pip install flake8
 sudo pip install bandit
 sudo pip install pylint
+
+# docker
+sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+sudo apt-get update -y
+sudo apt-get -y install docker-ce docker-ce-cli containerd.io
+sudo usermod -aG docker $USER
+
+# tsocks
+apt-get install tsocks
+echo "server = 127.0.0.1" >> ~/.tsocks
+echo "server_port = 10922" >> ~/.tsocks
+echo "export TSOCKS_CONF_FILE=/home/user/.tsocks" >> ~/.bashrc
+source ~/.bashrc
