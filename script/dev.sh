@@ -5,7 +5,7 @@ apt-get update -y
 apt-get upgrade -y
 
 # Install some system packages
-apt-get -y install python3 python-pip python-setuptools git python-dev
+apt-get -y install python3 python-pip python-setuptools python3-distutils git python-dev
 
 # Install gnupg
 pip install gnupg
