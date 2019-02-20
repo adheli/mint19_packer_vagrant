@@ -1,8 +1,9 @@
 # mint19_packer_vagrant
 Linux Mint 19 Configuration for Python project with Packer and Vagrant
 
+# Usage
 
-Download the project.
+You need to have installed on your machine: Virtual Box, Packer and Vagrant.
 
 Please edit only script/dev.sh file to add any new packages you need to install before packing the box to Vagrant.
 
