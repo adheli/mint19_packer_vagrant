@@ -1,40 +1,52 @@
 {
-  "builders": [{
-    "vm_name": "{{user `vm_name`}}",
-    "type": "virtualbox-iso",
-    "guest_os_type": "Ubuntu_64",
-    "http_directory": "http",
-    "iso_url": "{{ user `iso_url` }}",
-    "iso_checksum": "{{ user `iso_checksum` }}",
-    "iso_checksum_type": "{{ user `iso_checksum_type` }}",
-    "ssh_password": "{{ user `ssh_password` }}",
-    "ssh_username": "{{ user `ssh_username` }}",
-    "ssh_wait_timeout": "10000s",
-    "headless": "{{ user `headless` }}",
-    "boot_command": [
-      "{{ user `boot_command_prefix` }}",
-      "/casper/vmlinuz ",
-      "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `preseed` }} ",
-      "boot=casper ",
-      "initrd=/casper/initrd.lz ",
-      "debug-ubiquity ",
-      "automatic-ubiquity ",
-      "quiet ",
-      "splash ",
-      "noprompt ",
-      "-- <enter>"
-    ],
-    "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
-    "post_shutdown_delay": "1m",
-    "disk_size": "{{ user `disk_size` }}",
-    "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
-    "virtualbox_version_file": ".vbox_version",
-    "hard_drive_interface": "sata",
-    "vboxmanage": [
-      [ "modifyvm", "{{.Name}}", "--memory", "{{ user `memory` }}" ],
-      [ "modifyvm", "{{.Name}}", "--cpus", "{{ user `cpus` }}" ]
-    ]
-  }],
+  "builders": [
+    {
+      "vm_name": "{{user `vm_name`}}",
+      "type": "virtualbox-iso",
+      "guest_os_type": "Ubuntu_64",
+      "http_directory": "http",
+      "iso_url": "{{ user `iso_url` }}",
+      "iso_checksum": "{{ user `iso_checksum` }}",
+      "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+      "ssh_password": "{{ user `ssh_password` }}",
+      "ssh_username": "{{ user `ssh_username` }}",
+      "ssh_wait_timeout": "10000s",
+      "headless": "{{ user `headless` }}",
+      "boot_command": [
+        "{{ user `boot_command_prefix` }}",
+        "/casper/vmlinuz ",
+        "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `preseed` }} ",
+        "boot=casper ",
+        "initrd=/casper/initrd.lz ",
+        "debug-ubiquity ",
+        "automatic-ubiquity ",
+        "quiet ",
+        "splash ",
+        "noprompt ",
+        "-- <enter>"
+      ],
+      "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
+      "post_shutdown_delay": "1m",
+      "disk_size": "{{ user `disk_size` }}",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "hard_drive_interface": "sata",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "{{ user `memory` }}"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "{{ user `cpus` }}"
+        ]
+      ]
+    }
+  ],
   "post-processors": [
     [
       {
@@ -79,21 +91,20 @@
     }
   ],
   "variables": {
+    "_comment": "Build with `packer build core_template.json`",
     "cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}",
     "headless": "false",
     "hostname": "vagrant",
     "ssh_fullname": "vagrant",
     "ssh_password": "vagrant",
     "ssh_username": "vagrant",
-
-    "_comment": "Build with `packer build -var-file=mint-cinnamon-19.0.json core_template.json`",
     "boot_command_prefix": "<esc><wait><tab><wait><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
     "box_tag": "edosadh/mint19dev",
     "cpus": "2",
     "disk_size": "102400",
     "iso_checksum_type": "sha256",
-    "iso_checksum": "c92a9baafdd599da057a97236f0a853ce1f8b3c7ad41e652ceba493f9ca5623f",
-    "iso_url": "http://ftp.heanet.ie/pub/linuxmint.com/stable/19/linuxmint-19-cinnamon-64bit-v2.iso",
+    "iso_checksum": "bb4b3ad584f2fec1d91ad60fe57ad4044e5c0934a5e3d229da129c9513862eb0",
+    "iso_url": "http://ftp-stud.hs-esslingen.de/pub/Mirrors/linuxmint.com/stable/19.1/linuxmint-19.1-cinnamon-64bit.iso",
     "memory": "4096",
     "preseed": "mint-19.seed",
     "vagrantfile_template": "tpl/vagrantfile-mint-cinnamon-19.tpl",
